@@ -6,8 +6,7 @@ import (
 
 func main() {
 	taskController := NewTaskController()
-	taskRouter := NewTaskRouter(taskController)
 
-	http.Handle("/", taskRouter)
+	http.Handle("/", taskController)
 	http.ListenAndServe(":8080", nil)
 }
