@@ -33,8 +33,13 @@ func (s *SQLTaskRepository) GetList() (tasks []TaskData, err error) {
 }
 
 func (s *SQLTaskRepository) GetByID(id string) (task TaskData, err error) {
-	fmt.Printf("SQLTaskRepository.GetById(%v)\n", id)
-	return
+	query := `SELECT id, title, description	FROM tasks WHERE id = $1`
+	row := s.db.QueryRow(query, id)
+	err = row.Scan(&task.ID, &task.Title, &task.Description)
+	if err != nil {
+		return task, err
+	}
+	return task, nil
 }
 
 func (s *SQLTaskRepository) Create(task TaskData) error {
