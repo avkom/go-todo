@@ -1,6 +1,7 @@
 package main
 
 type TaskData struct {
-	Title       string
-	Description string
+	ID          string `json:"id"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
 }
