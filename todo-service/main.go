@@ -5,7 +5,8 @@ import (
 )
 
 func main() {
-	taskService := NewTaskService()
+	taskRepository := NewSQLTaskRepository()
+	taskService := NewTaskService(taskRepository)
 	taskController := NewTaskController(taskService)
 
 	http.Handle("/", taskController)

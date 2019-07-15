@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 type TaskService interface {
 	GetList() (tasks []TaskData, err error)
 	GetByID(id string) (task TaskData, err error)
@@ -12,34 +8,38 @@ type TaskService interface {
 	Delete(id string) error
 }
 
-type TaskServiceImpl struct {
+type TaskRepository interface {
+	GetList() (tasks []TaskData, err error)
+	GetByID(id string) (task TaskData, err error)
+	Create(task TaskData) error
+	Update(task TaskData) error
+	Delete(id string) error
 }
 
-func NewTaskService() TaskService {
-	return &TaskServiceImpl{}
+type TaskServiceImpl struct {
+	repository TaskRepository
+}
+
+func NewTaskService(repository TaskRepository) TaskService {
+	return &TaskServiceImpl{repository}
 }
 
 func (s *TaskServiceImpl) GetList() (tasks []TaskData, err error) {
-	fmt.Printf("TaskService.GetList()\n")
-	return
+	return s.repository.GetList()
 }
 
 func (s *TaskServiceImpl) GetByID(id string) (task TaskData, err error) {
-	fmt.Printf("TaskService.GetById(%v)\n", id)
-	return
+	return s.repository.GetByID(id)
 }
 
 func (s *TaskServiceImpl) Create(task TaskData) error {
-	fmt.Printf("TaskService.Create()\n")
-	return nil
+	return s.repository.Create(task)
 }
 
 func (s *TaskServiceImpl) Update(task TaskData) error {
-	fmt.Printf("TaskService.Update()\n")
-	return nil
+	return s.repository.Update(task)
 }
 
 func (s *TaskServiceImpl) Delete(id string) error {
-	fmt.Printf("TaskService.Delete(%v)\n", id)
-	return nil
+	return s.repository.Delete(id)
 }
