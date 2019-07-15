@@ -14,8 +14,22 @@ func NewSQLTaskRepository(db *sql.DB) TaskRepository {
 }
 
 func (s *SQLTaskRepository) GetList() (tasks []TaskData, err error) {
-	fmt.Printf("SQLTaskRepository.GetList()\n")
-	return
+	query := `SELECT id, title, description	FROM tasks`
+	rows, err := s.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var task TaskData
+		if err := rows.Scan(&task.ID, &task.Title, &task.Description); err != nil {
+			return nil, err
+		}
+		tasks = append(tasks, task)
+	}
+
+	return tasks, nil
 }
 
 func (s *SQLTaskRepository) GetByID(id string) (task TaskData, err error) {
