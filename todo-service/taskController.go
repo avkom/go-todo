@@ -31,7 +31,7 @@ func (c *TaskControllerImpl) getList(w http.ResponseWriter, r *http.Request) {
 
 func (c *TaskControllerImpl) getByID(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
-	task, err := c.s.GetById(id)
+	task, err := c.s.GetByID(id)
 	writeJSONResponse(w, task, err)
 }
 

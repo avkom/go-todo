@@ -6,7 +6,7 @@ import (
 
 type TaskService interface {
 	GetList() (tasks []TaskData, err error)
-	GetById(id string) (task TaskData, err error)
+	GetByID(id string) (task TaskData, err error)
 	Create(task TaskData) error
 	Update(task TaskData) error
 	Delete(id string) error
@@ -24,7 +24,7 @@ func (s *TaskServiceImpl) GetList() (tasks []TaskData, err error) {
 	return
 }
 
-func (s *TaskServiceImpl) GetById(id string) (task TaskData, err error) {
+func (s *TaskServiceImpl) GetByID(id string) (task TaskData, err error) {
 	fmt.Printf("TaskService.GetById(%v)\n", id)
 	return
 }
