@@ -9,10 +9,11 @@ import (
 
 type TaskControllerImpl struct {
 	m *mux.Router
+	s TaskService
 }
 
-func NewTaskController() http.Handler {
-	c := &TaskControllerImpl{mux.NewRouter()}
+func NewTaskController(service TaskService) http.Handler {
+	c := &TaskControllerImpl{mux.NewRouter(), service}
 
 	c.m.Methods("GET").Path("/api/tasks").HandlerFunc(getList)
 	c.m.Methods("GET").Path("/api/tasks/{id}").HandlerFunc(getById)
