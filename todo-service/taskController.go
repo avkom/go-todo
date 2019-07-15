@@ -16,7 +16,7 @@ func NewTaskController(service TaskService) http.Handler {
 	c := &TaskControllerImpl{mux.NewRouter(), service}
 
 	c.r.Methods("GET").Path("/api/tasks").HandlerFunc(c.getList)
-	c.r.Methods("GET").Path("/api/tasks/{id}").HandlerFunc(c.getById)
+	c.r.Methods("GET").Path("/api/tasks/{id}").HandlerFunc(c.getByID)
 	c.r.Methods("POST").Path("/api/tasks").HandlerFunc(c.create)
 	c.r.Methods("PUT").Path("/api/tasks/{id}").HandlerFunc(c.update)
 	c.r.Methods("DELETE").Path("/api/tasks/{id}").HandlerFunc(c.delete)
@@ -29,7 +29,7 @@ func (c *TaskControllerImpl) getList(w http.ResponseWriter, r *http.Request) {
 	writeJSONResponse(w, tasks, err)
 }
 
-func (c *TaskControllerImpl) getById(w http.ResponseWriter, r *http.Request) {
+func (c *TaskControllerImpl) getByID(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	task, err := c.s.GetById(id)
 	writeJSONResponse(w, task, err)
