@@ -1,14 +1,16 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 )
 
 type SQLTaskRepository struct {
+	db *sql.DB
 }
 
-func NewSQLTaskRepository() TaskRepository {
-	return &SQLTaskRepository{}
+func NewSQLTaskRepository(db *sql.DB) TaskRepository {
+	return &SQLTaskRepository{db}
 }
 
 func (s *SQLTaskRepository) GetList() (tasks []TaskData, err error) {
