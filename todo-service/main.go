@@ -2,10 +2,12 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 
+	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -28,8 +30,17 @@ func main() {
 	taskService := NewTaskService(taskRepository)
 	taskController := NewTaskController(taskService)
 
-	http.Handle("/", taskController)
-	http.ListenAndServe(":8080", nil)
+	router := mux.NewRouter()
+	router.PathPrefix("/api/tasks").Handler(taskController)
+	router.PathPrefix("/static/").Handler(http.FileServer(http.Dir(".")))
+	router.PathPrefix("/").HandlerFunc(indexHandler)
+
+	http.ListenAndServe(":8080", router)
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("indexHandler")
+	http.ServeFile(w, r, "./index.html")
 }
 
 func initDB(db *sql.DB) error {
