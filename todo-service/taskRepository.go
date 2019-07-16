@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 )
 
 type SQLTaskRepository struct {
@@ -43,16 +42,19 @@ func (s *SQLTaskRepository) GetByID(id string) (task TaskData, err error) {
 }
 
 func (s *SQLTaskRepository) Create(task TaskData) error {
-	fmt.Printf("SQLTaskRepository.Create()\n")
-	return nil
+	query := `INSERT INTO tasks VALUES (id = $1, title = $2, description = $3)`
+	_, err := s.db.Exec(query, task.ID, task.Title, task.Description)
+	return err
 }
 
 func (s *SQLTaskRepository) Update(task TaskData) error {
-	fmt.Printf("SQLTaskRepository.Update()\n")
-	return nil
+	query := `UPDATE tasks SET title = $2, description = $3 WHERE id = $1`
+	_, err := s.db.Exec(query, task.ID, task.Title, task.Description)
+	return err
 }
 
 func (s *SQLTaskRepository) Delete(id string) error {
-	fmt.Printf("SQLTaskRepository.Delete(%v)\n", id)
-	return nil
+	query := `DELETE FROM tasks WHERE id = $1`
+	_, err := s.db.Exec(query, id)
+	return err
 }
