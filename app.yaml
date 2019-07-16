@@ -1,0 +1,4 @@
+runtime: go112
+main: ./todoservice
+env_variables:
+  POSTGRES_CONNECTION: user=postgres password=A1bCpa4OAAM397fn host=/cloudsql/go-1-246722:us-east1:pg1/ dbname=postgres

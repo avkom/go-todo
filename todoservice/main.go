@@ -12,9 +12,11 @@ import (
 )
 
 func main() {
+	log.Print("Starting application")
 	godotenv.Load()
 
 	dataSourceName := os.Getenv("POSTGRES_CONNECTION")
+	log.Printf("POSTGRES_CONNECTION: %v", dataSourceName)
 	db, err := sql.Open("postgres", dataSourceName)
 	if err != nil {
 		log.Fatal(err)
@@ -34,7 +36,12 @@ func main() {
 	router.PathPrefix("/static/").Handler(http.FileServer(http.Dir(".")))
 	router.PathPrefix("/").HandlerFunc(indexHandler)
 
-	http.ListenAndServe(":8080", router)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	log.Printf("Listening on port: %v", port)
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
