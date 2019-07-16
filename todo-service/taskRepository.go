@@ -42,7 +42,7 @@ func (s *SQLTaskRepository) GetByID(id string) (task TaskData, err error) {
 }
 
 func (s *SQLTaskRepository) Create(task TaskData) error {
-	query := `INSERT INTO tasks VALUES (id = $1, title = $2, description = $3)`
+	query := `INSERT INTO tasks (id, title, description) VALUES ($1, $2, $3)`
 	_, err := s.db.Exec(query, task.ID, task.Title, task.Description)
 	return err
 }
