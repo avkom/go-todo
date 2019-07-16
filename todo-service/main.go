@@ -34,7 +34,7 @@ func main() {
 
 func initDB(db *sql.DB) error {
 	query := `CREATE TABLE IF NOT EXISTS tasks (
-		id VARCHAR(50) NOT NULL PRIMARY KEY,
+		id VARCHAR(36) NOT NULL PRIMARY KEY,
 		title VARCHAR(100) NOT NULL,
 		description TEXT
 	)`

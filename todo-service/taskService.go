@@ -1,5 +1,9 @@
 package main
 
+import (
+	"github.com/google/uuid"
+)
+
 type TaskService interface {
 	GetList() (tasks []TaskData, err error)
 	GetByID(id string) (task TaskData, err error)
@@ -33,6 +37,7 @@ func (s *TaskServiceImpl) GetByID(id string) (task TaskData, err error) {
 }
 
 func (s *TaskServiceImpl) Create(task TaskData) error {
+	task.ID = uuid.New().String()
 	return s.repository.Create(task)
 }
 
