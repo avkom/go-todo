@@ -14,14 +14,19 @@ require.config({
 		}
 	},
 	paths: {
-		jquery: '../node_modules/jquery/dist/jquery',
-		underscore: '../node_modules/underscore/underscore',
-		backbone: '../node_modules/backbone/backbone',
-		text: '../node_modules/requirejs-text/text'
+		jquery: 'node_modules/jquery/dist/jquery',
+		underscore: 'node_modules/underscore/underscore',
+		backbone: 'node_modules/backbone/backbone',
+		text: 'node_modules/requirejs-text/text'
 	}
 });
 
 require([
-], function () {
-    alert("Hello, Backbone!")
+    'backbone',
+    'scripts/taskListView',
+    'scripts/router'
+], function (Backbone, TaskListView, Router) {
+    new Router();
+    Backbone.history.start();
+    new TaskListView().render();
 });
