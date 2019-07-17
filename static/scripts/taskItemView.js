@@ -40,8 +40,13 @@ define([
             };
             this._model.set(data);
             this._model.save(null, {
-                success: Backbone.history.navigate('tasks', { trigger: true })
+                success: this._onTaskSaved.bind(this),
+                error: this._onTaskSaved.bind(this)
             });
+        },
+
+        _onTaskSaved: function () {
+            Backbone.history.navigate('tasks', { trigger: true });
         }
 	});
 

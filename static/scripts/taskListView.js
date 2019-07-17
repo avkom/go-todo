@@ -33,7 +33,14 @@ define([
         _onDeleteClicked: function (e) {
             var taskId = $(e.currentTarget).data('task-id');
             var task = this._collection.get(taskId);
-            task.destroy();
+            task.destroy({ 
+                error: this._onTaskDeleted.bind(this),
+                success: this._onTaskDeleted.bind(this)
+            });
+        },
+
+        _onTaskDeleted: function () {
+            this._collection.fetch().then(this.render.bind(this));
         }
 	});
 

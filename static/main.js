@@ -28,5 +28,4 @@ require([
 ], function (Backbone, TaskListView, Router) {
     new Router();
     Backbone.history.start();
-    new TaskListView().render();
 });
