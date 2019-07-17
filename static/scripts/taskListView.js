@@ -1,13 +1,16 @@
 define([
 	'jquery',
 	'underscore',
-	'backbone',
+    'backbone',
+    'scripts/taskCollection',
 	'text!scripts/taskListTemplate.html'
-], function ($, _, Backbone, taskListTemplate) {
+], function ($, _, Backbone, TaskCollection, taskListTemplate) {
 
 	var TaskListView = Backbone.View.extend({
 
-		el:  '.todoapp',
+        _collection: new TaskCollection(),
+        
+        el: '.todoapp',
 
 		template: _.template(taskListTemplate),
 
@@ -15,6 +18,7 @@ define([
 		},
 
 		initialize: function () {
+            this._collection.fetch();
 		},
 
 		render: function () {
