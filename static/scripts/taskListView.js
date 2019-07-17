@@ -15,6 +15,7 @@ define([
 		template: _.template(taskListTemplate),
 
 		events: {
+            'click .new': '_onNewClicked',
             'click .delete': '_onDeleteClicked'
 		},
 
@@ -30,6 +31,10 @@ define([
 			return this;
         },
         
+        _onNewClicked: function () {
+            Backbone.history.navigate('tasks/new', { trigger: true });
+        },
+
         _onDeleteClicked: function (e) {
             var taskId = $(e.currentTarget).data('task-id');
             var task = this._collection.get(taskId);

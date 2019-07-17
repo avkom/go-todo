@@ -1,4 +1,6 @@
 <div>
+    <button type="button" class="new"">New Task</button>
+    <hr />
     <% for (var i = 0; i < tasks.length; i++) { %>
         <div>
             <a href="#tasks/<%- tasks[i].id %>"><%- tasks[i].title %></a>

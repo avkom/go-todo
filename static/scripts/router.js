@@ -19,7 +19,7 @@ define([
         
         taskItem: function (id) {
             new TaskItemView({id: id}).render();
-		}
+        }
 	});
 
 	return TodoRouter;
