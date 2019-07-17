@@ -15,6 +15,7 @@ define([
 		template: _.template(taskListTemplate),
 
 		events: {
+            'click .delete': '_onDeleteClicked'
 		},
 
 		initialize: function () {
@@ -27,7 +28,13 @@ define([
             };
 			this.$el.html(this.template(data));
 			return this;
-		},
+        },
+        
+        _onDeleteClicked: function (e) {
+            var taskId = $(e.currentTarget).data('task-id');
+            var task = this._collection.get(taskId);
+            task.destroy();
+        }
 	});
 
 	return TaskListView;
