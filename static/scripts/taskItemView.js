@@ -15,7 +15,8 @@ define([
 		template: _.template(taskItemTemplate),
 
 		events: {
-            'click button': '_onSaveClicked'
+            'click .save': '_onSaveClicked',
+            'click .cancel': '_onTaskSaved'
 		},
 
 		initialize: function () {

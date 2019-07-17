@@ -2,7 +2,7 @@
     <% for (var i = 0; i < tasks.length; i++) { %>
         <div>
             <a href="#tasks/<%- tasks[i].id %>"><%- tasks[i].title %></a>
-            <div>Description: <%- tasks[i].description %></div>
+            <div><%- tasks[i].description %></div>
             <button type="button" class="delete" data-task-id="<%- tasks[i].id %>">Delete</button>
             <hr />
         </div>
