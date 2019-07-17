@@ -4,6 +4,7 @@ define([
 ], function (_, Backbone) {
 
 	var TaskModel = Backbone.Model.extend({
+        urlRoot: '/api/tasks',
 		defaults: {
             id: '',
             title: '',
