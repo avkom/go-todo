@@ -15,7 +15,7 @@ define([
 		template: _.template(taskItemTemplate),
 
 		events: {
-            'button': '_onSaveClicked'
+            'click button': '_onSaveClicked'
 		},
 
 		initialize: function () {
@@ -34,7 +34,14 @@ define([
         },
         
         _onSaveClicked: function () {
-            _model.save();
+            var data = {
+                title: this.$(".title").val(),
+                description: this.$(".description").val()
+            };
+            this._model.set(data);
+            this._model.save(null, {
+                success: Backbone.history.navigate('tasks', { trigger: true })
+            });
         }
 	});
 

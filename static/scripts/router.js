@@ -8,6 +8,7 @@ define([
 	var TodoRouter = Backbone.Router.extend({
 		routes: {
             '': 'taskList',
+            'tasks': 'taskList',
             'tasks/new': 'taskItem',
             'tasks/:id': 'taskItem'
 		},
