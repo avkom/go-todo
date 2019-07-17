@@ -1,1 +1,9 @@
-<div>Hello, Backbone!</div>
+<div>
+    <% for (var i = 0; i < tasks.length; i++) { %>
+        <div>
+            <div>Title: <%- tasks[i].title %></div>
+            <div>Description: <%- tasks[i].description %></div>
+            <hr />
+        </div>
+    <% } %>
+</div>

@@ -18,11 +18,14 @@ define([
 		},
 
 		initialize: function () {
-            this._collection.fetch();
+            this._collection.fetch().then(this.render.bind(this));
 		},
 
 		render: function () {
-			this.$el.html(this.template());
+            var data = {
+                tasks: this._collection.toJSON()
+            };
+			this.$el.html(this.template(data));
 			return this;
 		},
 	});
